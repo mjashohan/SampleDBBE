@@ -1,6 +1,6 @@
 <?PHP
 
-include('database-config-local.php'); // include database config file
+include('database-config-local.php'); // include database configuration file
 
 class DatabaseModel{
     

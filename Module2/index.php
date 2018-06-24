@@ -2,12 +2,11 @@
 
 include('restaurantTwo.php');
 
-class WebParser{
+class WebParser extends restaurantTwo{
     
     public function index(){
         
-        $restaurantTwo = new RestaurantTwo();
-        $restaurantTwo->setMenuItem();     
+        $this->setMenuItem();     
           
     }
     
