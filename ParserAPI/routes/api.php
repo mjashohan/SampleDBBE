@@ -29,3 +29,6 @@ Route::get('/v1/search/items/{searchText}', 'MenuController@getItemsByName');
 
 // get searched items by ingredients
 Route::get('/v1/search/ingredients/{searchText}', 'MenuController@getItemsByIngredient');
+
+// get searched items by ingredients or item name
+Route::get('/v1/search/{searchText}', 'MenuController@getItemsBySearchQuery');
