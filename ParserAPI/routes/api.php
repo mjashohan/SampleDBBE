@@ -24,5 +24,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // get all menu items
 Route::get('/v1/items', 'MenuController@getAllItem');
 
-// get searched item
-Route::get('/v1/search/{searchText}', 'MenuController@getSearchedItem');
+// get searched items
+Route::get('/v1/search/items/{searchText}', 'MenuController@getItemsByName');
+
+// get searched items by ingredients
+Route::get('/v1/search/ingredients/{searchText}', 'MenuController@getItemsByIngredient');

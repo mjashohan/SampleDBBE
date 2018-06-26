@@ -14,13 +14,20 @@ class MenuController extends Controller
         return Item::all();
     }
 
-    // return searched items
-    public function getSearchedItem($queryName){
+    // return searched items by item name
+    public function getItemsByName($queryName){
 
         $result = Item::where('itemName',$queryName)->get(); // returns array of objects
         return $result;
     }
 
-    
+    // return searched items by ingredients name
+    public function getItemsByIngredient($queryText){
+        
+        $result = Item::where('ingredients','LIKE', '%'. $queryText . '%')->get(); // returns array of objects
+        return $result;
 
+    }
+
+    
 }
