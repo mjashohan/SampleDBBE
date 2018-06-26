@@ -5,13 +5,13 @@ include('database-config-local.php'); // include database configuration file
 class DatabaseModel{
     
     
-    protected function saveMenuItems($count,$name,$ingredient,$price,$image,$webUrl){
+    protected function saveMenuItems($count,$name,$ingredient,$price,$image,$webUrl,$phone,$address){
         
         $connection = mysqli_connect(db_HOST,db_USER, db_PASS,db_NAME)
         or die("Could not connect to the Project Database:<br />" . mysql_error());
         
-        $sql = "INSERT INTO Items (itemName, price, ingredients,image,webUrl) 
-                VALUES ('$name', '$price', '$ingredient','$image','$webUrl')";
+        $sql = "INSERT INTO Items (itemName, price, ingredients,image,webUrl,phone,address) 
+                VALUES ('$name', '$price', '$ingredient','$image','$webUrl','$phone','$address')";
         
         if(mysqli_query($connection, $sql)){
             echo "Data Inserted successfully.";

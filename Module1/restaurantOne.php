@@ -27,15 +27,17 @@ class RestaurantOne extends DatabaseModel{
         $allMenuDetails=$this->html->find('div.menu_excerpt'); // array of objects of all div of class menu_excerpt
         $allMenuPrice=$this->html->find('span.menu_price'); // array of objects of all span with class menu_price
         $allMenuImages=$this->html->find('img'); // array of objects of all item images
+        $contactNumber=$this->html->find('span#top_contact_number a'); // string
+        $address=$this->html->find('span#top_contact_address'); // string
         
         for ($i=0; $i<$totalMenuItem; $i++){
             
             $price=$this->stringModifier->modifyString($allMenuPrice[$i]->innertext); //remove currency sign from price
-            $this->saveMenuItems($totalMenuItem,$allMenuName[$i]->innertext,$allMenuDetails[$i]->innertext,
-                                 $price,$allMenuImages[$i]->src,webPageUrl); // save data in the database
+            $this->saveMenuItems($totalMenuItem,$allMenuName[$i]->innertext,$allMenuDetails[$i]->innertext,$price,
+                                 $allMenuImages[$i]->src,webPageUrl,$contactNumber[0]->innertext,$address[0]->innertext); // save data in the database
         
         } // loop ends
-    
+        
     } 
         
 
