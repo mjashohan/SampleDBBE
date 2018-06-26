@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Item;
 
 class MenuController extends Controller
 {
     
-    public function index()
+    // return all menu Items
+    public function getAllItem()
     {
-        //return Article::all();
+        return Item::all();
     }
 
 

@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Item;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +18,7 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// api routes for menu items //
+
+Route::get('/v1/items', 'MenuController@getAllItem');
