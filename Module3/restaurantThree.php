@@ -25,12 +25,15 @@ class RestaurantThree extends DatabaseModel{
         $allMenuName=$this->html->find('b'); // array of objects of all b tag for item name
         $allMenuDetails=$this->html->find('span[itemprop="description"]'); // array of objects of all span of itemproperty description
         $allMenuPrice=$this->html->find('span.price'); // array of objects of all span with class price
-        
+        $phone=$this->html->find('span[itemprop="telephone"]')[0]->innertext; // string
+        $address=$this->html->find('span[itemprop="streetAddress"]')[0]->innertext.' , '
+                .$this->html->find('span[itemprop="addressLocality"]')[0]->innertext; // string concated restaurant address
+
         for ($i=0; $i<$totalMenuItem; $i++){
         
             $price=$this->stringModifier->modifyString($allMenuPrice[$i]->innertext); //remove currency sign from price
             $this->saveMenuItems($totalMenuItem,$allMenuName[$i]->innertext,$allMenuDetails[$i]->innertext,
-                                 $price,NULL,webPageUrl); // save data in the database
+                                 $price,NULL,webPageUrl,$phone,$address); // save data in the database
         
         } // loop ends
         
