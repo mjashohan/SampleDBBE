@@ -22,7 +22,8 @@ class CreateItemsTable extends Migration
             $table->string('webUrl');
             $table->string('phone');
             $table->string('address');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->nullable();
         });
     }
 
