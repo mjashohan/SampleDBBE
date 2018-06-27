@@ -5,6 +5,8 @@ include('htmlParser.php'); // include the PHP Parser Library
 require '../StringModifier.php' ; // string modifier helper class
 
 define('webPageUrl','https://www.lastellanera.de/pizza-und-speisekarte/'); // set the URL of restaurant menu pages
+define('phone','030 23949708'); // set the phone number of restaurant
+define('address','Leykestraße 18,12053 Berlin-Neukölln'); // set the address of restaurant
 
 
 class RestaurantTwo extends DatabaseModel{
@@ -31,7 +33,7 @@ class RestaurantTwo extends DatabaseModel{
             
             $price=$this->stringModifier->modifyString($allMenuPrice[$i]->innertext); //remove currency sign from price
             $this->saveMenuItems($totalMenuItem,$allMenuName[$i]->innertext,$allMenuDetails[$i]->innertext,
-                                 $price,NULL,webPageUrl); // save data in the database
+                                 $price,NULL,webPageUrl,phone,address); // save data in the database
         
         } // loop ends
         
