@@ -1,10 +1,10 @@
 <?PHP
 
-include('../ModuleDatabase/DatabaseModel.php'); // include database model
-include('htmlParser.php'); // include the PHP Parser Library
-require '../StringModifier.php' ; // string modifier helper class
+include_once($_SERVER['DOCUMENT_ROOT'].'/WebParser/ModuleDatabase/DatabaseModel.php'); // include database model
+require_once($_SERVER['DOCUMENT_ROOT'].'/WebParser/htmlParser.php'); // include the PHP Parser Library
+require_once($_SERVER['DOCUMENT_ROOT'].'/WebParser/StringModifier.php'); // string modifier helper class
 
-define('webPageUrl','http://lapausa.de/menue/'); // set the URL of restaurant menu pages
+define('webPageUrlOne','http://lapausa.de/menue/'); // set the URL of restaurant menu pages
 
 
 class RestaurantOne extends DatabaseModel{
@@ -14,7 +14,7 @@ class RestaurantOne extends DatabaseModel{
 
     function __construct() {
         
-        $this->html = file_get_html(webPageUrl);
+        $this->html = file_get_html(webPageUrlOne);
         $this->stringModifier = new StringModifier();
 
     }
@@ -34,7 +34,7 @@ class RestaurantOne extends DatabaseModel{
             
             $price=$this->stringModifier->modifyString($allMenuPrice[$i]->innertext); //remove currency sign from price
             $this->saveMenuItems($totalMenuItem,$allMenuName[$i]->innertext,$allMenuDetails[$i]->innertext,$price,
-                                 $allMenuImages[$i]->src,webPageUrl,$contactNumber[0]->innertext,$address[0]->innertext); // save data in the database
+                                 $allMenuImages[$i]->src,webPageUrlOne,$contactNumber[0]->innertext,$address[0]->innertext); // save data in the database
         
         } // loop ends
         

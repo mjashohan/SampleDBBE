@@ -31,4 +31,7 @@ Route::get('/v1/search/items/{searchText}', 'MenuController@getItemsByName');
 Route::get('/v1/search/ingredients/{searchText}', 'MenuController@getItemsByIngredient');
 
 // get searched items by ingredients or item name
-Route::get('/v1/search/{searchText}', 'MenuController@getItemsBySearchQuery');
+Route::get('/v1/search/{searchText}', 'MenuController@getItemsBySearchQuery');  
+
+// update all menu dishes
+Route::get('/v1/update-menu', 'MenuController@updateMenu');  

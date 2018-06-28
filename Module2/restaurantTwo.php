@@ -1,12 +1,12 @@
 <?PHP
 
-include('../ModuleDatabase/DatabaseModel.php'); // include database model
-include('htmlParser.php'); // include the PHP Parser Library
-require '../StringModifier.php' ; // string modifier helper class
+include_once($_SERVER['DOCUMENT_ROOT'].'/WebParser/ModuleDatabase/DatabaseModel.php'); // include database model
+require_once($_SERVER['DOCUMENT_ROOT'].'/WebParser/htmlParser.php'); // include the PHP Parser Library
+require_once($_SERVER['DOCUMENT_ROOT'].'/WebParser/StringModifier.php'); // string modifier helper class
 
-define('webPageUrl','https://www.lastellanera.de/pizza-und-speisekarte/'); // set the URL of restaurant menu pages
-define('phone','030 23949708'); // set the phone number of restaurant
-define('address','Leykestraße 18,12053 Berlin-Neukölln'); // set the address of restaurant
+define('webPageUrlTwo','https://www.lastellanera.de/pizza-und-speisekarte/'); // set the URL of restaurant menu pages
+define('phone','030 23949708'); // set the phone number of restaurant. @todo needed to be parsed later
+define('address','Leykestraße 18,12053 Berlin-Neukölln'); // set the address of restaurant. @todo needed to be parsed later
 
 
 class RestaurantTwo extends DatabaseModel{
@@ -16,7 +16,7 @@ class RestaurantTwo extends DatabaseModel{
 
     function __construct() {
         
-        $this->html = file_get_html(webPageUrl);
+        $this->html = file_get_html(webPageUrlTwo);
         $this->stringModifier = new StringModifier();
 
     }
@@ -33,7 +33,7 @@ class RestaurantTwo extends DatabaseModel{
             
             $price=$this->stringModifier->modifyString($allMenuPrice[$i]->innertext); //remove currency sign from price
             $this->saveMenuItems($totalMenuItem,$allMenuName[$i]->innertext,$allMenuDetails[$i]->innertext,
-                                 $price,NULL,webPageUrl,phone,address); // save data in the database
+                                 $price,NULL,webPageUrlTwo,phone,address); // save data in the database
         
         } // loop ends
         
