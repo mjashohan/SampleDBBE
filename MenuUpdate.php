@@ -17,8 +17,8 @@ class MenuUpdate{
 
 
      public function index(){
-
-       
+ 
+        
         // update menu for restaurant one
         $restaurantOne = new restaurantOne();
         $restaurantOne->setMenuItem(); 
@@ -29,7 +29,7 @@ class MenuUpdate{
         $restaurantThree = new restaurantThree();
         $restaurantThree->setMenuItem();
         
-      
+        
      }
 
 

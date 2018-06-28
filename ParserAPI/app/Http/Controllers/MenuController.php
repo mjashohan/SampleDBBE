@@ -47,8 +47,8 @@ class MenuController extends Controller
     public function updateMenu(){
 
         Item::truncate(); // truncate Item table. It won't work if this model has foreign key dependencies.
+        file_get_contents("http://localhost/WebParser/MenuUpdate.php");
         
     }
-
-    
+   
 }
