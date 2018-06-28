@@ -20,14 +20,14 @@ class MenuController extends Controller
     public function getItemsByName($queryName){
 
         $result = Item::where('itemName',$queryName)->get(); // returns array of objects
-        return $result?$result:" No Dishes Found! Try another please! ";
+        return $result ? $result : " No Dishes Found! Try another please! ";
     }
 
     // return searched items by ingredients name
     public function getItemsByIngredient($queryText){
         
         $result = Item::where('ingredients','LIKE', '%'. $queryText . '%')->get(); // returns array of objects
-        return $result?$result:" No Dishes Found! Try another please! ";
+        return $result ? $result : " No Dishes Found! Try another please! ";
 
     }
 
@@ -40,15 +40,17 @@ class MenuController extends Controller
                                 ->orWhere('ingredients', 'like', '%' . $queryString . '%');
                     })->get(); // return array of objects
         
-        return $result?$result:" No Dishes Found! Try another please! ";
+        return $result ? $result : " No Dishes Found! Try another please! ";
     }
 
     // update the menu dishes 
     public function updateMenu(){
 
         Item::truncate(); // truncate Item table. It won't work if this model has foreign key dependencies.
-        file_get_contents("http://localhost/WebParser/MenuUpdate.php");
-        
+        file_get_contents("http://localhost/WebParser/MenuUpdate.php"); // call update method
+        $data = Item::all();
+        return $data ? json_encode($data) : json_encode("No Dishes Avaialable"); // return json data to client side
     }
    
+
 }
