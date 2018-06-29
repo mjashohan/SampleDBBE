@@ -21,18 +21,16 @@ class MenuController extends Controller
     public function getItemsByName($queryName){
         
         header('Access-Control-Allow-Origin: *'); 
-        $result = Item::where('itemName',$queryName)->get(); // returns array of objects
-        return $result ? $result : " No Dishes Found! Try another please! ";
+        $result = Item::where('itemName', 'like', '%' . $queryName . '%')->get(); // returns array of objects
+        return $result ? json_encode($result) : json_encode("No Dishes Avaialable"); // return json data to client side
     }
 
     // return searched items by ingredients name
     public function getItemsByIngredient($queryText){
         
         $result = Item::where('ingredients','LIKE', '%'. $queryText . '%')->get(); // returns array of objects
-        return $result ? $result : " No Dishes Found! Try another please! ";
-
+        return $result ? json_encode($result) : json_encode("No Dishes Avaialable"); // return json data to client side
     }
-
 
     // return searched item by ingredients or item name
     public function getItemsBySearchQuery($queryString){
@@ -42,7 +40,7 @@ class MenuController extends Controller
                                 ->orWhere('ingredients', 'like', '%' . $queryString . '%');
                     })->get(); // return array of objects
         
-        return $result ? $result : " No Dishes Found! Try another please! ";
+        return $result ? json_encode($result) : json_encode("No Dishes Avaialable"); // return json data to client side
     }
 
     // update the menu dishes 
