@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Item;
+use App\ItemLog;
 
 define('updateAPIUrl',"http://localhost/WebParser/MenuUpdate.php");
 
@@ -46,11 +47,38 @@ class MenuController extends Controller
     // update the menu dishes 
     public function updateMenu(){
 
-        Item::truncate(); // truncate Item table. It won't work if this model has foreign key dependencies.
-        file_get_contents(updateAPIUrl); // call update method
-        $data = Item::all();
-        return $data ? json_encode($data) : json_encode("No Dishes Avaialable"); // return json data to client side
+        // check time interval before update operation
+        if($this->checkDateInterval()){
+            $data = Item::all();
+            return $data ? json_encode($data) : json_encode("No Dishes Avaialable"); // return json data to client side
+        }else{
+            $this->updateLogData();
+            Item::truncate(); // truncate Item table. It won't work if this model has foreign key dependencies.
+            file_get_contents(updateAPIUrl); // call update method
+            $data = Item::all();
+            return $data ? json_encode($data) : json_encode("No Dishes Avaialable"); // return json data to client side
+        }
+    
     }
+
+    // check update request time interval
+    public function checkDateInterval(){
+
+        $currentDate = date('Y-m-d H:i:s');
+        $lastUpdateDated = ItemLog::first()->updated_at;
+        $hourdiff = round((strtotime($lastUpdateDated) - strtotime($currentDate))/3600, 1);
+        return ($hourdiff <= 24) ? false : true; // return false if update query performed within last 24 hours
+    }
+
+    // update item log table data 
+    public function updateLogData(){
+
+        ItemLog::truncate(); //remove old entry
+        $log = new ItemLog();
+        $log->created_at= date('Y-m-d H:i:s');
+        $log->updated_at= date('Y-m-d H:i:s');
+        $log->save(); // create new log entry
+    } 
    
 
 }

@@ -11,9 +11,10 @@
 include_once('Module1/restaurantOne.php'); // include restaurantOne class
 include_once('Module2/restaurantTwo.php'); // include restaurantTwo class
 include_once('Module3/restaurantThree.php'); // include restaurantThree class
+include_once('ModuleDatabase/DatabaseModel.php'); // include database class
 
 
-class MenuUpdate{
+class WebParser extends DatabaseModel{
 
 
      public function index(){
@@ -29,12 +30,14 @@ class MenuUpdate{
         $restaurantThree = new restaurantThree();
         $restaurantThree->setMenuItem();
         
+        // insert log data into items log table
+        $this->saveLogData();
     }
 
 }
 
-$menu = new MenuUpdate();
-$menu->index();
+$parser = new WebParser();
+$parser->index();
 
 
 ?>
