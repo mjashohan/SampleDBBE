@@ -2,9 +2,7 @@
 
 /*
 
-@ Updates the Item table
-@ Accessible from client side
-@ class invoked when hit in the ParserAPI via '/api/v1/update-menu' endpoint
+@ Parse Restaurant Pages and store in the Item table
 
 */
 
@@ -19,7 +17,6 @@ class WebParser extends DatabaseModel{
 
      public function index(){
  
-        
         // update menu for restaurant one
         $restaurantOne = new restaurantOne();
         $restaurantOne->setMenuItem(); 

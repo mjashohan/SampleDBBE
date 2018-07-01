@@ -49,13 +49,13 @@ class MenuController extends Controller
 
         // check time interval before update operation
         if($this->checkDateInterval()){
-            $data = Item::all();
+            $data = Item::all(); // get old data
             return $data ? json_encode($data) : json_encode("No Dishes Avaialable"); // return json data to client side
         }else{
             $this->updateLogData();
             Item::truncate(); // truncate Item table. It won't work if this model has foreign key dependencies.
-            file_get_contents(updateAPIUrl); // call update method
-            $data = Item::all();
+            file_get_contents(updateAPIUrl); // call update method within the Core Parser
+            $data = Item::all(); // get updated data
             return $data ? json_encode($data) : json_encode("No Dishes Avaialable"); // return json data to client side
         }
     

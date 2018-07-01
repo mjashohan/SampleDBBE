@@ -35,11 +35,12 @@ class DatabaseModel{
                 VALUES ('$date', '$date')";
         
         if(mysqli_query($connection, $sql)){
-            // @todo 
+            // @todo in future
         } else{
-            // @todo
+            // @todo in future
         }
-    }
+
+    } // function ends
 
 } // end of class
 
