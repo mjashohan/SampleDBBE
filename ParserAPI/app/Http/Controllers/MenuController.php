@@ -66,8 +66,8 @@ class MenuController extends Controller
 
         $currentDate = date('Y-m-d H:i:s');
         $lastUpdateDated = ItemLog::first()->updated_at;
-        $hourdiff = round((strtotime($lastUpdateDated) - strtotime($currentDate))/3600, 1);
-        return ($hourdiff <= 24) ? false : true; // return false if update query performed within last 24 hours
+        $hourdiff = round((strtotime($currentDate) - strtotime($lastUpdateDated))/3600, 1);
+        return ($hourdiff >= 24) ? false : true; // return false if update query performed within last 24 hours
     }
 
     // update item log table data 
